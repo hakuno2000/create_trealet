@@ -9,30 +9,30 @@
     <v-row>
       <v-col cols="12" sm="6">
         <v-text-field
-          v-model="title"
-          label="Title"
-          outlined
-          @input="$emit('updateTitle', title)"
+            v-model="title"
+            label="Title"
+            outlined
+            @input="$emit('updateTitle', title)"
         ></v-text-field>
       </v-col>
       <v-col cols="12" sm="6">
         <v-text-field
-          v-model="author"
-          label="Author"
-          outlined
-          @change="$emit('updateAuthor', author)"
+            v-model="author"
+            label="Author"
+            outlined
+            @change="$emit('updateAuthor', author)"
         ></v-text-field>
       </v-col>
     </v-row>
-      <v-row>
+    <v-row>
       <v-container fluid>
         <v-textarea
-          name="input-7-1"
-          label="Description"
-          auto-grow
-          outlined
-          v-model="description"
-          @change="$emit('updateDescription', description)"
+            name="input-7-1"
+            label="Description"
+            auto-grow
+            outlined
+            v-model="description"
+            @change="$emit('updateDescription', description)"
         ></v-textarea>
       </v-container>
     </v-row>

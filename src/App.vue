@@ -3,21 +3,21 @@
     <v-app-bar app color="white">
       <div class="d-flex align-center">
         <v-img
-          alt="Trealet Logo"
-          class="shrink mr-2"
-          contain
-          src="@/assets/logo.png"
-          transition="scale-transition"
-          width="150"
+            alt="Trealet Logo"
+            class="shrink mr-2"
+            contain
+            src="@/assets/logo.png"
+            transition="scale-transition"
+            width="150"
         />
       </div>
 
       <v-spacer></v-spacer>
 
       <v-btn
-        href="https://hcloud.trealet.com/apps_dev/btl/nhom03/Streamline/?trealet=/albums/Nhom03/app/hoihoaphuchung.trealet"
-        target="_blank"
-        text
+          href="https://hcloud.trealet.com/apps_dev/btl/nhom03/Streamline/?trealet=/albums/Nhom03/app/hoihoaphuchung.trealet"
+          target="_blank"
+          text
       >
         <span class="mr-2">View Trealet</span>
         <v-icon>mdi-open-in-new</v-icon>
@@ -30,43 +30,43 @@
           <v-form>
             <v-container>
               <Info
-                :titleProp="title"
-                :authorProp="author"
-                :descriptionProp="description"
-                @updateTitle="updateTitle"
-                @updateAuthor="updateAuthor"
-                @updateDescription="updateDescription"
+                  :titleProp="title"
+                  :authorProp="author"
+                  :descriptionProp="description"
+                  @updateTitle="updateTitle"
+                  @updateAuthor="updateAuthor"
+                  @updateDescription="updateDescription"
               />
               <v-col class="d-flex mx-0 px-0" cols="12" sm="6">
                 <v-select
-                  v-model="trealetType"
-                  :items="trealetTypes"
-                  item-text="type"
-                  item-value="index"
-                  label="Trealet type"
-                  outlined
+                    v-model="trealetType"
+                    :items="trealetTypes"
+                    item-text="type"
+                    item-value="index"
+                    label="Trealet type"
+                    outlined
                 ></v-select>
               </v-col>
 
               <GridItemList
-                v-if="trealetType == 1"
-                :itemListProp="itemList"
-                @updateList="updateList"
+                  v-if="trealetType == 1"
+                  :itemListProp="itemList"
+                  @updateList="updateList"
               />
               <SlideItemList
-                v-if="trealetType == 2"
-                :itemListProp="itemList"
-                @updateList="updateList"
+                  v-if="trealetType == 2"
+                  :itemListProp="itemList"
+                  @updateList="updateList"
               />
 
               <v-divider class="my-12"></v-divider>
 
               <v-btn
-                class="ml-auto mb-3 d-block"
-                color="primary"
-                dark
-                large
-                @click="exportList"
+                  class="ml-auto mb-3 d-block"
+                  color="primary"
+                  dark
+                  large
+                  @click="exportList"
               >
                 Export
               </v-btn>
@@ -192,7 +192,11 @@ export default {
 
       // TO DO:
       // EXPORT FILE HERE
-      console.log(exportObj);
+      const data = JSON.stringify(exportObj, null, 2);
+      let FileSaver = require('file-saver');
+      let blob = new Blob([data], {type: "text/plain;charset=utf-8"});
+      FileSaver.saveAs(blob, "test.trealet");
+      console.log(data);
     },
   },
 };
