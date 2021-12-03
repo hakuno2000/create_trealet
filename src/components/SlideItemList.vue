@@ -2,12 +2,16 @@
   <v-data-table
       :headers="headers"
       :items="itemList"
+      :expanded.sync="expanded"
+      :single-expand="true"
+      item-key="item"
+      show-expand
       sort-by="number"
       class="elevation-1"
   >
     <template v-slot:top>
       <v-toolbar flat>
-        <v-toolbar-title>List of Items</v-toolbar-title>
+        <v-toolbar-title>List of Artists</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
@@ -19,7 +23,7 @@
                 v-on="on"
                 style="margin: 5px"
             >
-              Add Item
+              Add Artist
             </v-btn>
           </template>
           <v-card>
@@ -30,12 +34,30 @@
             <v-card-text>
               <v-container>
                 <v-row>
-                  <v-col cols="12" sm="6" md="4">
+                  <v-col cols="12" sm="6" md="5">
+                    <v-text-field
+                        v-model="editedItem.detail.title"
+                        label="Artist name"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="5">
                     <v-text-field
                         v-model="editedItem.item"
-                        label="Id of item"
+                        label="Id of artist's photo"
                         :rules="numberOnly()"
                     ></v-text-field>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="12" sm="12" md="12">
+                    <v-textarea
+                        name="input-7-1"
+                        label="Description"
+                        auto-grow
+                        outlined
+                        v-model="editedItem.detail.desc"
+                        @change="$emit('updateDesc', editedItem.detail.desc)"
+                    ></v-textarea>
                   </v-col>
                 </v-row>
               </v-container>
@@ -78,6 +100,19 @@
         </v-dialog>
       </v-toolbar>
     </template>
+    <template v-slot:expanded-item="{ headers, item }">
+      <td :colspan="headers.length">
+        <p></p>
+        <v-textarea
+            name="input-7-1"
+            label="List of pictures"
+            auto-grow
+            outlined
+            v-model="item.detail.items"
+            @change="$emit('updateItems', item.detail.items)"
+        ></v-textarea>
+      </td>
+    </template>
     <template v-slot:item.actions="{ item }">
       <v-icon small class="mr-2" @click="editItem(item)"> mdi-pencil</v-icon>
       <v-icon small @click="deleteItem(item)"> mdi-delete</v-icon>
@@ -98,27 +133,39 @@ export default {
   },
 
   data: () => ({
+    expanded: [],
     dialog: false,
     dialogDelete: false,
     headers: [
       {
-        text: "No.",
+        text: "Artist",
         align: "start",
         sortable: false,
-        value: "number",
+        value: "detail.title",
       },
-      {text: "Item Id", value: "item"},
+      {text: "Photo Id", value: "item"},
       {text: "Actions", value: "actions", sortable: false},
+      {value: 'data-table-expand'},
     ],
     itemList: [],
     editedIndex: -1,
     editedItem: {
-      number: 0,
-      item: 0,
+      item: "",
+      detail: {
+        exec: "streamline",
+        title: "",
+        desc: "",
+        items: [],
+      },
     },
     defaultItem: {
-      number: 0,
-      item: 0,
+      item: "",
+      detail: {
+        exec: "streamline",
+        title: "",
+        desc: "",
+        items: [],
+      },
     },
   }),
 
@@ -203,6 +250,14 @@ export default {
     numberOnly() {
       return [(val) => /^[0-9]*$/.test(val) || "Invalid"];
     },
+
+    updateDesc(value) {
+      this.editedItem.detail.desc = value;
+    },
+
+    updateItems(value) {
+      this.editedItem.detail.items = value;
+    }
   },
 };
 </script>

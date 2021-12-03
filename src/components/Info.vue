@@ -7,6 +7,16 @@
       </v-toolbar>
     </v-row>
     <v-row>
+      <v-col cols="12" sm="12">
+        <v-text-field
+            v-model="filename"
+            label="File Name (for .trealet file export)"
+            outlined
+            @input="$emit('updateFilename', filename)"
+        ></v-text-field>
+      </v-col>
+    </v-row>
+    <v-row>
       <v-col cols="12" sm="6">
         <v-text-field
             v-model="title"
@@ -42,6 +52,10 @@
 <script>
 export default {
   props: {
+    filenameProp: {
+      type: String,
+      default: ""
+    },
     titleProp: {
       type: String,
       default: ""
@@ -57,12 +71,14 @@ export default {
   },
 
   data: () => ({
+    filename: "hoihoaphuchung",
     title: "Chủ đề của Trealet",
     author: "Tác giả",
     description: "Nội dung miêu tả",
   }),
 
   mounted() {
+    this.filename = this.filenameProp
     this.title = this.titleProp
     this.author = this.authorProp
     this.description = this.descriptionProp

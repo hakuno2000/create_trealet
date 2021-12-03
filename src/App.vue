@@ -30,23 +30,25 @@
           <v-form>
             <v-container>
               <Info
+                  :filenameProp="filename"
                   :titleProp="title"
                   :authorProp="author"
                   :descriptionProp="description"
+                  @updateFilename="updateFilename"
                   @updateTitle="updateTitle"
                   @updateAuthor="updateAuthor"
                   @updateDescription="updateDescription"
               />
-              <v-col class="d-flex mx-0 px-0" cols="12" sm="6">
-                <v-select
-                    v-model="trealetType"
-                    :items="trealetTypes"
-                    item-text="type"
-                    item-value="index"
-                    label="Trealet type"
-                    outlined
-                ></v-select>
-              </v-col>
+<!--              <v-col class="d-flex mx-0 px-0" cols="12" sm="6">-->
+<!--                <v-select-->
+<!--                    v-model="trealetType"-->
+<!--                    :items="trealetTypes"-->
+<!--                    item-text="type"-->
+<!--                    item-value="index"-->
+<!--                    label="Trealet type"-->
+<!--                    outlined-->
+<!--                ></v-select>-->
+<!--              </v-col>-->
 
               <GridItemList
                   v-if="trealetType == 1"
@@ -93,18 +95,29 @@ export default {
   },
 
   data: () => ({
-    title: "Chủ đề của Trealet",
-    author: "Tác giả",
-    description: "Nội dung miêu tả",
+    filename: "hoihoaphuchung",
+    title: "Hội hoạ Phục Hưng",
+    author: "Nhóm 03",
+    description: "Thời kì Phục Hưng thường được người ta miêu tả ở khoảng thế kỉ thứ 16 nhưng ngay từ thế kỉ thứ 14, những mầm mống đầu tiên của phong trào này đã bắt đầu nhem nhóm từ Ý(Quatrocento – 1400). Trong thời kì này, sự trỗi dậy của tầng lớp giàu có – tiền thân của giai cấp tư sản sau này đã tạo ra một làn sóng xây dựng một nền văn hóa mới để chống lại giai cấp phong kiến lạc hậu. Phục Hưng có gốc từ tiếng Pháp (Renaissance – nghĩa là sự tái sinh), điều này ám chỉ tinh thần của nó là thời kỳ làm sống lại những tinh hoa văn hóa của Hy Lạp và La Mã cổ.",
     trealetType: 2,
     itemList: [
       {
-        number: 1,
-        item: "12345",
+        item: "21322",
+        detail: {
+          exec: "streamline",
+          title: "Leonardo da Vinci",
+          desc: "Leonardo da Vinci (1452-1519) là một họa sĩ, nhà điêu khắc, kiến trúc sư, nhạc sĩ, bác sĩ, kỹ sư, nhà giải phẫu, nhà sáng tạo và triết học tự nhiên. Với tài năng trời phú, ông được mọi người ví như một thiên tài toàn năng người Ý với danh hiệu Leonardo da Vinci tác phẩm nghệ thuật.",
+          items: [11274, 11242, 16194, 16202, 16210, 16218, 16226, 16234, 16258, 16274, 16282, 16290, 16298],
+        },
       },
       {
-        number: 2,
-        item: "56789",
+        item: "21354",
+        detail: {
+          exec: "streamline",
+          title: "Masaccio",
+          desc: "Masaccio (1401-1428), tên khai sinh Tommaso di Ser Giovanni di Simone,  là họa sĩ Ý vĩ đại đầu tiên của giai đoạn thế kỷ thứ 15 của thời kỳ Phục hưng Ý. Theo Vasari, Masaccio là họa sĩ xuất sắc nhất trong thế hệ của ông vì kỹ năng tái tạo hình khối sống động như thật và các phong trào cũng như ý nghĩa thuyết phục của tạo hình ba chiều.",
+          items: [16434, 16418, 16426],
+        },
       },
     ],
     trealetTypes: [
@@ -150,6 +163,10 @@ export default {
   },
 
   methods: {
+    updateFilename(value) {
+      this.filename = value;
+    },
+
     updateTitle(value) {
       this.title = value;
     },
@@ -175,7 +192,10 @@ export default {
         }));
       } else if (this.trealetType == 2) {
         // Slide trealet has an item list of array of numbers
-        return this.itemList.map((obj) => +obj.item);
+        return this.itemList.map((obj) => ({
+          item: +obj.item,
+          detail: obj.detail,
+        }));
       }
     },
 
@@ -195,7 +215,7 @@ export default {
       const data = JSON.stringify(exportObj, null, 2);
       let FileSaver = require('file-saver');
       let blob = new Blob([data], {type: "text/plain;charset=utf-8"});
-      FileSaver.saveAs(blob, "test.trealet");
+      FileSaver.saveAs(blob, this.filename+".trealet");
       console.log(data);
     },
   },
