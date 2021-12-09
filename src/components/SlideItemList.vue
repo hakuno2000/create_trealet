@@ -11,7 +11,7 @@
   >
     <template v-slot:top>
       <v-toolbar flat>
-        <v-toolbar-title>List of Artists</v-toolbar-title>
+        <v-toolbar-title>List of Slides</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
         <v-dialog v-model="dialog" max-width="500px">
@@ -23,7 +23,7 @@
                 v-on="on"
                 style="margin: 5px"
             >
-              Add Artist
+              Add Slide
             </v-btn>
           </template>
           <v-card>
@@ -37,13 +37,13 @@
                   <v-col cols="12" sm="6" md="5">
                     <v-text-field
                         v-model="editedItem.detail.title"
-                        label="Artist name"
+                        label="Slide name"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="5">
                     <v-text-field
                         v-model="editedItem.item"
-                        label="Id of artist's photo"
+                        label="Id of slide's photo"
                         :rules="numberOnly()"
                     ></v-text-field>
                   </v-col>
@@ -138,7 +138,7 @@ export default {
     dialogDelete: false,
     headers: [
       {
-        text: "Artist",
+        text: "Slide",
         align: "start",
         sortable: false,
         value: "detail.title",
