@@ -80,6 +80,7 @@ Với mỗi grid hoặc slide, người tạo trealet có thể chỉnh sửa:
 - Sửa tên grid: Chỉnh sửa trường ```Title``` để cố định tên grid chung. Tên của grid trên streamline sẽ mang giá trị này
 - Sửa tác giả: Chỉnh sửa trường ```Author``` để cố định tên tác giả trên grid chung. 
 - Sửa giới thiệu grid: Chỉnh sửa trường ```Description``` để cố định giới thiệu grid.
+- Sửa tên file trealet dẫn sang quiz: Chỉnh sửa trường ```Quiz file name```.
 
 Tại List of Slides, người tạo trealet có thể thêm slide (qua nút Add Slide bên phải bảng), sửa slide cũ (qua nút cây bút ở cột Actions), xóa slide (qua nút thùng rác ở cột Actions) và chỉnh sửa nội dung các ảnh cần được trình chiếu trong slide qua List of pictures (danh sách được hiển thị khi ấn vào nút mũi tên quay xuống ở cột bên phải cùng của bảng)
 - Thêm slide: Ấn nút Add Slide để hiển thị modal thêm mới slide. Tại đây có các trường Slide name, Id of slide's photo, Description, tương ứng dùng để chỉnh sửa tên của slide, hình ảnh đại diện (thumbnail) của slide sẽ hiển thị tại grid và giới thiệu của slide. Tại streamline, di chuột vào ảnh của 1 ô trên grid sẽ hiển thị tên và giới thiệu của slide tương ứng. Người dùng nhấn nút Save để lưu lại slide này, hoặc Cancel để dừng việc thêm mới
