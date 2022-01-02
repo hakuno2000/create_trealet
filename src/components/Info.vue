@@ -46,6 +46,16 @@
         ></v-textarea>
       </v-container>
     </v-row>
+    <v-row>
+      <v-container fluid>
+        <v-text-field
+            v-model="quiz"
+            label="Quiz file name"
+            outlined
+            @input="$emit('updateQuiz', quiz)"
+        ></v-text-field>
+      </v-container>
+    </v-row>
   </div>
 </template>
 
@@ -68,6 +78,10 @@ export default {
       type: String,
       default: ""
     },
+    quizProp: {
+      type: String,
+      default: ""
+    }
   },
 
   data: () => ({
@@ -75,6 +89,7 @@ export default {
     title: "Chủ đề của Trealet",
     author: "Tác giả",
     description: "Nội dung miêu tả",
+    quiz: "quiz.trealet"
   }),
 
   mounted() {
@@ -82,6 +97,7 @@ export default {
     this.title = this.titleProp
     this.author = this.authorProp
     this.description = this.descriptionProp
+    this.quiz = this.quizProp
   }
 };
 </script>

@@ -34,10 +34,12 @@
                   :titleProp="title"
                   :authorProp="author"
                   :descriptionProp="description"
+                  :quizProp="quiz"
                   @updateFilename="updateFilename"
                   @updateTitle="updateTitle"
                   @updateAuthor="updateAuthor"
                   @updateDescription="updateDescription"
+                  @updateQuiz="updateQuiz"
               />
 <!--              <v-col class="d-flex mx-0 px-0" cols="12" sm="6">-->
 <!--                <v-select-->
@@ -100,6 +102,7 @@ export default {
     author: "Nhóm 03",
     description: "Thời kì Phục Hưng thường được người ta miêu tả ở khoảng thế kỉ thứ 16 nhưng ngay từ thế kỉ thứ 14, những mầm mống đầu tiên của phong trào này đã bắt đầu nhem nhóm từ Ý(Quatrocento – 1400). Trong thời kì này, sự trỗi dậy của tầng lớp giàu có – tiền thân của giai cấp tư sản sau này đã tạo ra một làn sóng xây dựng một nền văn hóa mới để chống lại giai cấp phong kiến lạc hậu. Phục Hưng có gốc từ tiếng Pháp (Renaissance – nghĩa là sự tái sinh), điều này ám chỉ tinh thần của nó là thời kỳ làm sống lại những tinh hoa văn hóa của Hy Lạp và La Mã cổ.",
     trealetType: 2,
+    quiz: "quiz.trealet",
     itemList: [
       {
         item: "21322",
@@ -183,6 +186,10 @@ export default {
       this.itemList = value;
     },
 
+    updateQuiz(value) {
+      this.quiz = value
+    },
+
     getUsableItemList() {
       if (this.trealetType == 1) {
         // Grid trealet has an item list of array of objects
@@ -206,6 +213,7 @@ export default {
           title: this.title,
           author: this.author,
           desc: this.description,
+          quiz: this.quiz,
           items: this.getUsableItemList(),
         },
       };
